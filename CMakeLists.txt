@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.11)
 
 project(SHAD ${cmake_3_0_PROJ_VERSION} ${cmake_3_0_LANGUAGES} CXX)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "No build type selected, default to Debug")
@@ -43,16 +43,25 @@ if (DEMO_RUNTIME_SYSTEM STREQUAL "TBB")
   if (TBB_FOUND)
     list(APPEND RT ${TBB_LIBRARIES})
   endif()
-elseif(DEMO_RUNTIME_SYSTEM STREQUAL "GMT")
+endif()
+
+if(DEMO_RUNTIME_SYSTEM STREQUAL "GMT")
   find_package(GMT REQUIRED)
+  message(STATUS "${GMT_INCLUDE_DIRS}")
+  include_directories(${GMT_INCLUDE_DIRS})
   list(APPEND RT ${GMT_LIBRARIES})
 endif()
+
 find_package(SHAD REQUIRED)
 if (SHAD_FOUND)
   list(APPEND RT ${SHAD_LIBRARIES})
 endif()
   
 include_directories(${SHAD_INCLUDE_DIRS})
+include_directories(include)
 
 add_executable(hello-shad src/hello-shad.cc)
 target_link_libraries(hello-shad ${RT})
+
+add_executable(tc src/reader.cc src/tc.cc)
+target_link_libraries(tc ${RT})
