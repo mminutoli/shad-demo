@@ -4,13 +4,13 @@
 #include "shad/shad.h"
 #include "shad/runtime/runtime.h"
 
-namespace shad {
-
 void helloTask(const size_t &v) {
   std::stringstream SS;
-  SS << rt::thisLocality() << "-> Hello, SHAD : " << v << std::endl;
+  SS << shad::rt::thisLocality() << "-> Hello, SHAD : " << v << std::endl;
   std::cout << SS.str();
 }
+
+namespace shad {
 
 int main(int argc, char *argv[])
 {

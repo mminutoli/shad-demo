@@ -62,5 +62,8 @@ include_directories(include)
 add_executable(hello-shad src/hello-shad.cc)
 target_link_libraries(hello-shad ${RT})
 
+add_executable(async-hello-shad src/async-hello-shad.cc)
+target_link_libraries(async-hello-shad ${RT})
+
 add_executable(tc src/reader.cc src/tc.cc)
 target_link_libraries(tc ${RT})
