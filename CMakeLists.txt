@@ -1,5 +1,5 @@
 # See README.md for instruction on how to build SHAD with CMake
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.8)
 
 project(SHAD ${cmake_3_0_PROJ_VERSION} ${cmake_3_0_LANGUAGES} CXX)
 set(CMAKE_CXX_STANDARD 14)
@@ -47,7 +47,6 @@ endif()
 
 if(DEMO_RUNTIME_SYSTEM STREQUAL "GMT")
   find_package(GMT REQUIRED)
-  message(STATUS "${GMT_INCLUDE_DIRS}")
   include_directories(${GMT_INCLUDE_DIRS})
   list(APPEND RT ${GMT_LIBRARIES})
 endif()
